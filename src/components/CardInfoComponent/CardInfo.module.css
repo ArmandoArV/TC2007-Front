@@ -1,0 +1,242 @@
+.cardContainer {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 100%;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 1em;
+  position: relative;
+}
+
+.topContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+  height: 10%;
+  width: 100%;
+}
+
+.SearchBarContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+}
+
+.mediumContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+  height: 50%;
+  width: 100%;
+}
+
+.bottomContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+  height: 40%;
+  width: 100%;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-right: 1em;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  background: #f0f0f0;
+  border-radius: 1em;
+  margin: 1em;
+}
+
+.descriptionContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+}
+
+.description {
+  font-size: 1rem;
+  text-align: justify;
+}
+
+.typesContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+}
+
+.typeContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  margin: 1em;
+}
+
+.typeInput {
+  margin-right: 0.5em;
+  border-radius: 50%;
+  width: 1.5em;
+  height: 1.5em;
+  border: 1px solid black;
+}
+
+.locationsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.locationContainer {
+  margin: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+}
+
+.locationTitle {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-right: 1em;
+}
+
+.location {
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 0.5em;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.rightButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  margin-right: 2.5em;
+}
+
+.leftButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+}
+
+.btnSave {
+  background: #a3cb18;
+  border-radius: 0.5em;
+  border: none;
+  width: 55%;
+  height: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnDelete {
+  background: #aaaaaa;
+  border-radius: 0.5em;
+  border: none;
+  width: 55%;
+  height: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnDelete:hover {
+  transition: 0.2s;
+  background: #ff0000;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  scale: 1.1;
+}
+
+.btnSave:hover {
+  transition: 0.2s;
+  background: #a3cb18;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  scale: 1.1;
+}
+
+.icon {
+  margin-left: 0.5em;
+}
+
+.buttonEdit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 0.5em;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em;
+  margin-right: 2em;
+  margin-top: 2em;
+}
+
+
+.locationText{
+  font-size: 1rem;
+  text-align: center;
+  border: 1px solid rgb(138, 136, 136);
+  border-radius: 0.5em;
+  width: 100%;
+  color: rgb(138, 136, 136);
+}
