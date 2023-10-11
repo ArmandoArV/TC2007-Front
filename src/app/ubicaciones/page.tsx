@@ -16,6 +16,35 @@ interface Categoria {
 export default function Home() {
   const [getLatitud, setLatitud] = useState(0);
   const [getLongitud, setLongitud] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (query: any) => {
+    setSearchQuery(query);
+  };
+
+  const cardInformation = {
+    title: "Example Card Title",
+    description: "This is an example card description.",
+    image: villahermosa,
+  };
+
+  const location = {
+    latitud: 123.456, // Replace with actual latitude value
+    longitud: -78.91, // Replace with actual longitude value
+  };
+
+  const categories = [
+    { name: "Category 1", isActive: true },
+    { name: "Category 2", isActive: false },
+    // Add more categories as needed
+  ];
+
+  const type = {
+    turismo: true,
+    medicina: false,
+    agroforestal: true,
+    bioconstruccion: false,
+  };
 
   return (
     <main className="flex min-h-screen flex-row items-center justify-between p-2">
@@ -28,16 +57,23 @@ export default function Home() {
           <div className={styles.leftContainer}>
             <div className={styles.SearchBarContainer}>
               <SearchComponent
-                search={""}
-                setSearch={() => {}}
-                onSearch={() => {}}
+                search={searchQuery}
+                setSearch={setSearchQuery}
+                onSearch={handleSearch}
               />
             </div>
             <div className={styles.bottomContainer}>
-              <BarCardContainer />
+              <BarCardContainer searchQuery={searchQuery} />
             </div>
           </div>
-          <div className={styles.rightContainer}></div>
+          <div className={styles.rightContainer}>
+            <CardInfo
+              information={cardInformation}
+              location={location}
+              categoria={categories}
+              type={type}
+            />{" "}
+          </div>
         </div>
       </div>
     </main>

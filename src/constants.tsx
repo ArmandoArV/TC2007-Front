@@ -1,3 +1,5 @@
+export const API_URL = "https://1mfu6t7gmh.execute-api.us-east-1.amazonaws.com";
+
 export interface menuItem {
   name: string;
   path: string;

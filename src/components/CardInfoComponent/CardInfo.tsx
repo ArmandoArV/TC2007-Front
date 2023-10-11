@@ -2,7 +2,7 @@
 
 import React from "react";
 import styles from "./CardInfo.module.css";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { categoria, categorias } from "@/constants";
 import tick from "../../images/tick.png";
 import trash from "../../images/trash.png";
@@ -12,7 +12,7 @@ interface CardInfoProps {
   information: {
     title: string;
     description: string;
-    image: string;
+    image: StaticImageData;
   };
   location: {
     latitud: number;
