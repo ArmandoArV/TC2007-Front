@@ -6,7 +6,7 @@ import Image, { StaticImageData } from "next/image";
 import { categoria, categorias } from "@/constants";
 import tick from "../../images/tick.png";
 import trash from "../../images/trash.png";
-import edit from "../../images/edit.png";
+import edit from "../../images/Edit.png";
 
 interface CardInfoProps {
   information: {
