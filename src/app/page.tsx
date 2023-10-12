@@ -7,12 +7,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <form className="flex flex-col items-center justify-center mt-4">
         <div className="mt-20">
-          <Image
-            src={CienNatural}
-            alt="100%Natural Logo"
-            width={192}
-            height={81}
-          />
+          <img src={CienNatural.src} alt="Logo" />
         </div>
         <div className="mt-4  flex flex-col">
           <div className="flex justify-center flex flex-col mt-10">

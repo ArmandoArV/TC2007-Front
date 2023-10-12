@@ -4,9 +4,6 @@ import React from "react";
 import styles from "./CardInfo.module.css";
 import Image, { StaticImageData } from "next/image";
 import { categoria, categorias } from "@/constants";
-import tick from "../../images/tick.png";
-import trash from "../../images/trash.png";
-import edit from "../../images/Edit.png";
 
 interface CardInfoProps {
   information: {
@@ -107,7 +104,7 @@ export default function CardInfo({
               <button className={styles.btnDelete}>
                 Eliminar{" "}
                 <Image
-                  src={trash}
+                  src={"/images/trash.png"}
                   alt="delete"
                   width={20}
                   height={20}
@@ -119,7 +116,7 @@ export default function CardInfo({
               <button className={styles.btnSave}>
                 Guardar{" "}
                 <Image
-                  src={tick}
+                  src={"/images/tick.png"}
                   alt="save"
                   width={30}
                   height={50}
@@ -132,7 +129,7 @@ export default function CardInfo({
           <div className={styles.buttonContainer}>
             <button className={styles.buttonEdit} onClick={handleEditClick}>
               <Image
-                src={edit}
+                src={"/images/Edit.png"}
                 alt="save"
                 width={30}
                 height={50}

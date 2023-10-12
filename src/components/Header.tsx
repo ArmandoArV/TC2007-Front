@@ -42,7 +42,7 @@ export default function Header() {
           <div className="flex w-full items-center">
             <Link href={"/"} className="">
               <Image
-                src={LaVentanaLogo}
+                src={"/images/logos/LaVentana.png"}
                 alt="100%Natural Logo"
                 width={192}
                 height={81}
