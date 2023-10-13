@@ -41,7 +41,7 @@ export default function CardInfo({
       </div>
       <div className={styles.mediumContainer}>
         <div className={styles.imageContainer}>
-          <Image
+          <img
             src={information.image}
             alt={information.title}
             width={192}
@@ -80,7 +80,7 @@ export default function CardInfo({
             <div className={styles.leftButtonContainer}>
               <button className={styles.btnDelete}>
                 Eliminar{" "}
-                <Image
+                <img
                   src={"/images/trash.png"}
                   alt="delete"
                   width={20}
@@ -92,7 +92,7 @@ export default function CardInfo({
             <div className={styles.rightButtonContainer}>
               <button className={styles.btnSave}>
                 Guardar{" "}
-                <Image
+                <img
                   src={"/images/tick.png"}
                   alt="save"
                   width={30}
@@ -105,7 +105,7 @@ export default function CardInfo({
         ) : (
           <div className={styles.buttonContainer}>
             <button className={styles.buttonEdit} onClick={handleEditClick}>
-              <Image
+              <img
                 src={"/images/Edit.png"}
                 alt="save"
                 width={30}

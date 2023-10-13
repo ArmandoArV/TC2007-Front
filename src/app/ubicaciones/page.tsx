@@ -75,7 +75,9 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-row items-center justify-between p-2">
       <div className={styles.outerContainer}>
-        <button className={styles.addButton}>+</button>
+        <Link href="/add">
+          <button className={styles.addButton}>+</button>
+        </Link>
         <div className={styles.topContainer}>
           <h1 className={styles.sectionHeader}>Ubicaciones</h1>
         </div>

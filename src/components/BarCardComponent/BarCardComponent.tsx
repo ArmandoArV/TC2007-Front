@@ -16,7 +16,7 @@ export const UbicationCard = (props: UbicationCardProps) => {
   return (
     <div className={styles.cardContainer} onClick={props.onClick}>
       <div className={styles.cardImageContainer}>
-        <Image
+        <img
           src={props.information.image}
           alt="Picture of the author"
           width={100}

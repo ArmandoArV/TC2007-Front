@@ -41,7 +41,7 @@ export default function Header() {
         <div className="flex items-center justify-between py-3 min-[856px]:block">
           <div className="flex w-full items-center">
             <Link href={"/"} className="">
-              <Image
+              <img
                 src={"/images/logos/LaVentana.png"}
                 alt="100%Natural Logo"
                 width={192}
@@ -58,7 +58,7 @@ export default function Header() {
               ref={tooltipRef}
             >
               {isMenuOpen ? (
-                <Image
+                <img
                   className="focus:border-none active:border-none opacity-50"
                   src={"/images/icons/x.svg"}
                   alt="Close Icon"
@@ -66,7 +66,7 @@ export default function Header() {
                   height={24}
                 />
               ) : (
-                <Image
+                <img
                   className="focus:border-none active:border-none opacity-80"
                   src={"/images/icons/hamburger.svg"}
                   alt="Menu Icon"
