@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import CardInfo from "@/components/CardInfoComponent/CardInfo";
 import CienNatural from "../../images/CienNatural.png";
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { BarCardContainer } from "@/Containers/BarCardContainer/BarCardContainer";
 import SearchComponent from "@/components/SearchComponent/SearchComponent";
 import villahermosa from "../../images/100Villa.jpg";
@@ -29,37 +29,39 @@ export default function Home() {
     setSearchQuery(query);
   };
 
-  const cardInformation = {
-    title: getTitle,
-    description: getDescription,
-    image: getImagen,
-  };
+  const cardInformation = useMemo(() => {
+    return {
+      title: getTitle,
+      description: getDescription,
+      image: getImagen,
+    };
+  }, [getTitle, getDescription, getImagen]);
 
-  const location = {
-    latitud: getLatitud,
-    longitud: getLongitud,
-  };
+  const location = useMemo(() => {
+    return {
+      latitud: getLatitud,
+      longitud: getLongitud,
+    };
+  }, [getLatitud, getLongitud]);
 
-  const categories = getCategoria;
+  const categories = useMemo(() => {
+    return getCategoria;
+  }, [getCategoria]);
 
   const handleCardSelect = (cardId: number) => {
     setSelectedCardId(cardId);
-    console.log("CardId:", cardId);
   };
-
 
   const fetchData = useCallback(() => {
     fetch(`${API_URL}/proyecto/${selectedCardId}`)
       .then((response) => response.json())
       .then((data) => {
-        //setLocationData(data.proyecto);
         setTitle(data.proyecto.nombre_proyecto);
         setDescription(data.proyecto.descripcion_proyecto);
         setImagen(data.proyecto.imagen_proyecto);
         setLatitud(data.proyecto.latitud);
         setLongitud(data.proyecto.longitud);
         setCategoria(data.proyecto.categoria_proyecto);
-        console.log("data: ", data.proyecto);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -93,14 +95,16 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className={styles.rightContainer}>
-            <CardInfo
-              information={cardInformation}
-              location={location}
-              categoria={categories}
-              id={selectedCardId}
-            />{" "}
-          </div>
+          {selectedCardId ? (
+            <div className={styles.rightContainer}>
+              <CardInfo
+                information={cardInformation}
+                location={location}
+                categoria={categories}
+                id={selectedCardId}
+              />
+            </div>
+          ) : null}
         </div>
       </div>
     </main>
