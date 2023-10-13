@@ -7,12 +7,14 @@ interface UbicationCardProps {
     title: string;
     description: string;
     image: string;
+    id: number;
   };
+  onClick: () => void;
 }
 
 export const UbicationCard = (props: UbicationCardProps) => {
   return (
-    <div className={styles.cardContainer}>
+    <div className={styles.cardContainer} onClick={props.onClick}>
       <div className={styles.cardImageContainer}>
         <Image
           src={props.information.image}

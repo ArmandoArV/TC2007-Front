@@ -33,6 +33,20 @@
   color: #00887d;
 }
 
+.cardContainer:hover{
+  cursor: pointer;
+  scale: 1.05;
+  transition: 0.5s;
+}
+
+.cardTitle:hover{
+  text-decoration: underline;
+  transition: 0.5s;
+}
+
+
+
+
 @media (max-width: 767px) {
   .cardContainer {
     flex-direction: column;

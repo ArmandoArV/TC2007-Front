@@ -3,10 +3,12 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import CardInfo from "@/components/CardInfoComponent/CardInfo";
 import CienNatural from "../../images/CienNatural.png";
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { BarCardContainer } from "@/Containers/BarCardContainer/BarCardContainer";
 import SearchComponent from "@/components/SearchComponent/SearchComponent";
 import villahermosa from "../../images/100Villa.jpg";
+import { API_URL } from "@/constants";
+import { get } from "http";
 
 interface Categoria {
   name: string;
@@ -17,34 +19,56 @@ export default function Home() {
   const [getLatitud, setLatitud] = useState(0);
   const [getLongitud, setLongitud] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCardId, setSelectedCardId] = useState(0);
+  const [getTitle, setTitle] = useState("");
+  const [getDescription, setDescription] = useState("");
+  const [getImagen, setImagen] = useState("");
+  const [getCategoria, setCategoria] = useState("");
 
   const handleSearch = (query: any) => {
     setSearchQuery(query);
   };
 
   const cardInformation = {
-    title: "Example Card Title",
-    description: "This is an example card description.",
-    image: villahermosa,
+    title: getTitle,
+    description: getDescription,
+    image: getImagen,
   };
 
   const location = {
-    latitud: 123.456, // Replace with actual latitude value
-    longitud: -78.91, // Replace with actual longitude value
+    latitud: getLatitud,
+    longitud: getLongitud,
   };
 
-  const categories = [
-    { name: "Category 1", isActive: true },
-    { name: "Category 2", isActive: false },
-    // Add more categories as needed
-  ];
+  const categories = getCategoria;
 
-  const type = {
-    turismo: true,
-    medicina: false,
-    agroforestal: true,
-    bioconstruccion: false,
+  const handleCardSelect = (cardId: number) => {
+    setSelectedCardId(cardId);
+    console.log("CardId:", cardId);
   };
+
+
+  const fetchData = useCallback(() => {
+    fetch(`${API_URL}/proyecto/${selectedCardId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        //setLocationData(data.proyecto);
+        setTitle(data.proyecto.nombre_proyecto);
+        setDescription(data.proyecto.descripcion_proyecto);
+        setImagen(data.proyecto.imagen_proyecto);
+        setLatitud(data.proyecto.latitud);
+        setLongitud(data.proyecto.longitud);
+        setCategoria(data.proyecto.categoria_proyecto);
+        console.log("data: ", data.proyecto);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [selectedCardId]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   return (
     <main className="flex min-h-screen flex-row items-center justify-between p-2">
@@ -63,7 +87,10 @@ export default function Home() {
               />
             </div>
             <div className={styles.bottomContainer}>
-              <BarCardContainer searchQuery={searchQuery} />
+              <BarCardContainer
+                searchQuery={searchQuery}
+                onClickCard={handleCardSelect}
+              />
             </div>
           </div>
           <div className={styles.rightContainer}>
@@ -71,7 +98,7 @@ export default function Home() {
               information={cardInformation}
               location={location}
               categoria={categories}
-              type={type}
+              id={selectedCardId}
             />{" "}
           </div>
         </div>

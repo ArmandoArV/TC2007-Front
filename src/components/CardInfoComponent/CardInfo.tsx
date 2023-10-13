@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import styles from "./CardInfo.module.css";
 import Image, { StaticImageData } from "next/image";
 import { categoria, categorias } from "@/constants";
@@ -9,38 +9,24 @@ interface CardInfoProps {
   information: {
     title: string;
     description: string;
-    image: StaticImageData;
+    image: string;
   };
   location: {
     latitud: number;
     longitud: number;
   };
-  categoria: categoria[];
-  type: {
-    [key: string]: boolean;
-  };
+  categoria: string;
+
+  id: number;
 }
 
 export default function CardInfo({
   information,
   location,
-  type,
   categoria,
+  id,
 }: CardInfoProps) {
-  const [getType, setType] = React.useState({
-    turismo: false,
-    medicina: false,
-    agroforestal: false,
-    bioconstruccion: false,
-  });
-
-  const [getLongitud, setLongitud] = React.useState(0);
-  const [getLatitud, setLatitud] = React.useState(0);
-  const [isEdit, setIsEdit] = React.useState(false);
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = event.target;
-    setType({ ...getType, [name]: checked });
-  };
+  const [isEdit, setIsEdit] = useState(false);
 
   const handleEditClick = () => {
     setIsEdit(true);
@@ -68,17 +54,8 @@ export default function CardInfo({
       </div>
       <div className={styles.bottomContainer}>
         <div className={styles.typesContainer}>
-          {categorias.map((categoriaItem) => (
-            <div className={styles.typeContainer} key={categoriaItem.name}>
-              <input
-                className={styles.typeInput}
-                type="checkbox"
-                disabled={!isEdit}
-                onChange={handleCheckboxChange}
-              />
-              <label className={styles.typeLabel}>{categoriaItem.name}</label>
-            </div>
-          ))}
+          <h3 className={styles.typesTitle}>Categoria(s): </h3>
+          <p className={styles.typesText}>{categoria}</p>
         </div>
         <div className={styles.locationsContainer}>
           <div className={styles.locationContainer}>
