@@ -28,7 +28,6 @@ export default function Home() {
         text: "All the fields are required!",
       });
     } else {
-      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(usernameLogin);
       const data = {
         usuario_admin: usernameLogin,
         clave_admin: passwordLogin,

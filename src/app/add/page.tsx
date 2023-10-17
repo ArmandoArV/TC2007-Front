@@ -28,6 +28,8 @@ export default function Home() {
     url_proyecto: "",
     imagen: "",
     logo: "",
+    horario_apertura_proyecto: "",
+    horario_cierre_proyecto: "",
   });
 
   const handleInputChange = (event: any) => {
@@ -43,13 +45,17 @@ export default function Home() {
     fetch(`${API_URL}/proyecto`, {
       method: "POST",
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("token") || "",
       },
       body: JSON.stringify(projectData),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log("Response Body:", data); // Print the response body
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
   }, [projectData]);
 
@@ -201,6 +207,27 @@ export default function Home() {
             id="url_proyecto"
             onChange={handleInputChange}
           />
+          <label className={styles.label} htmlFor="horario_apertura_proyecto">
+            Horario de apertura
+          </label>
+          <input
+            className="border border-gray-300 p-2"
+            type="time"
+            name="horario_apertura_proyecto"
+            id="horario_apertura_proyecto"
+            onChange={handleInputChange}
+          />
+          <label className={styles.label} htmlFor="horario_cierre_proyecto">
+            Horario de cierre
+          </label>
+          <input
+            className="border border-gray-300 p-2"
+            type="time"
+            name="horario_cierre_proyecto"
+            id="horario_cierre_proyecto"
+            onChange={handleInputChange}
+          />
+
           <button
             className="bg-blue-500 text-white p-2 rounded mt-2"
             onClick={handleSave}
