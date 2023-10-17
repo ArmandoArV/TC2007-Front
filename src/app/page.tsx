@@ -9,15 +9,11 @@ export default function Home() {
   const [usernameLogin, setUsernameLogin] = useState("");
   const [passwordLogin, setPasswordLogin] = useState("");
 
-  const handleUsernameLogin = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
+  const handleUsernameLogin = (e: any) => {
     setUsernameLogin(e.target.value);
   };
 
-  const handlePasswordLogin = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
+  const handlePasswordLogin = (e: any) => {
     setPasswordLogin(e.target.value);
   };
 
@@ -30,46 +26,25 @@ export default function Home() {
         text: "All the fields are required!",
       });
     } else {
-      // Check if input is an email
       const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(usernameLogin);
-
-      // Set the data to send in the fetch request
-      const requestData = isEmail
-        ? { email: usernameLogin, password: passwordLogin }
-        : { username: usernameLogin, password: passwordLogin };
-
-      fetch(`${API_URL}/login`, {
+      const requestData = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(requestData),
-      })
+        clave_admin: "TUNA",
+        usuario_admin: "Tuna123321",
+      };
+
+      console.log("Request Data:", requestData);
+
+      fetch(`${API_URL}/login`, requestData)
         .then((response) => response.json())
-        .then(async (data) => {
-          if (data.message === "User logged in successfully") {
-            Swal.fire({
-              icon: "success",
-              title: "Success",
-              text: "You have successfully logged in!",
-            });
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("idUser", data.idUser.toString());
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Incorrect email or username or password!",
-            });
-          }
+        .then((data) => {
+          console.log(data);
         })
         .catch((error) => {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Something went wrong!",
-          });
-          console.log(error);
+          console.error("Error:", error);
         });
     }
   };
@@ -87,6 +62,7 @@ export default function Home() {
               className="w-96 h-12 px-4 mt-2 text-xl border border-black rounded-md"
               type="text"
               placeholder="Usuario"
+              onChange={handleUsernameLogin}
             />
           </div>
           <div className="flex justify-center flex flex-col mt-10">
@@ -97,20 +73,17 @@ export default function Home() {
               className="w-96 h-12 px-4 mt-2 text-xl border border-black rounded-md"
               type="password"
               placeholder="Contraseña"
+              onChange={handlePasswordLogin}
             />
           </div>
         </div>
         <div className="flex justify-center mt-10">
-          <Link
-            href={"/recuperar"}
-            className="text-xl font-bold font-Ruda text-ventana-blue"
+          <button
+            className="w-50 h-12 px-4  text-xl rounded-md bg-ventana-blue text-white font-bold"
+            type="button"
+            onClick={handleSubmitLogin}
           >
-            ¿Olvidaste tu contraseña?
-          </Link>
-        </div>
-        <div className="flex justify-center mt-10">
-          <button className="w-50 h-12 px-4  text-xl rounded-md bg-ventana-blue text-white font-bold">
-            <Link href={"/ubicaciones"}>Iniciar Sesión</Link>
+            Iniciar Sesión
           </button>
         </div>
       </form>
