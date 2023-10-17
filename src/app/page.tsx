@@ -4,6 +4,8 @@ import Image from "next/image";
 import CienNatural from "@/images/CienNatural.png";
 import { API_URL } from "@/constants";
 import React, { useCallback, useState } from "react";
+import { useRouter } from "next/router";
+
 const Swal = require("sweetalert2");
 export default function Home() {
   const [usernameLogin, setUsernameLogin] = useState("");
@@ -52,7 +54,7 @@ export default function Home() {
               text: "You have successfully logged in!",
             });
             localStorage.setItem("token", data.token);
-            localStorage.setItem("idUser", data.idUser.toString());
+            window.location.href = "/ubicaciones";
           } else {
             Swal.fire({
               icon: "error",
