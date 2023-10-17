@@ -280,3 +280,11 @@
   font-weight: bold;
   margin-right: 1em;
 }
+
+.infoText {
+  font-size: 1rem;
+  text-align: center;
+  border: 1px solid rgb(138, 136, 136);
+  width: 5em;
+  color: rgb(138, 136, 136);
+}
