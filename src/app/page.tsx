@@ -27,13 +27,17 @@ export default function Home() {
       });
     } else {
       const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(usernameLogin);
+      const data = {
+        usuario_admin: usernameLogin,
+        clave_admin: passwordLogin,
+      };
       const requestData = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
         },
-        clave_admin: "TUNA",
-        usuario_admin: "Tuna123321",
+        body: JSON.stringify(data),
       };
 
       console.log("Request Data:", requestData);
@@ -41,7 +45,21 @@ export default function Home() {
       fetch(`${API_URL}/login`, requestData)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          if (data.mensaje === "usuario autenticado") {
+            Swal.fire({
+              icon: "success",
+              title: "Success",
+              text: "You have successfully logged in!",
+            });
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("idUser", data.idUser.toString());
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Incorrect email or username or password!",
+            });
+          }
         })
         .catch((error) => {
           console.error("Error:", error);
