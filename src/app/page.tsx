@@ -3,8 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import CienNatural from "@/images/CienNatural.png";
 import { API_URL } from "@/constants";
-import React, { useCallback, useState } from "react";
-import { useRouter } from "next/router";
+import React, { useState } from "react";
 
 const Swal = require("sweetalert2");
 export default function Home() {

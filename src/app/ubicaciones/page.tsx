@@ -24,6 +24,11 @@ export default function Home() {
   const [getDescription, setDescription] = useState("");
   const [getImagen, setImagen] = useState("");
   const [getCategoria, setCategoria] = useState("");
+  const [getEstado, setEstado] = useState("");
+  const [getTipo, setTipo] = useState("");
+  const [getApertura, setApertura] = useState("");
+  const [getCierre, setCierre] = useState("");
+  const [getUrl, setUrl] = useState("");
 
   const handleSearch = (query: any) => {
     setSearchQuery(query);
@@ -34,8 +39,22 @@ export default function Home() {
       title: getTitle,
       description: getDescription,
       image: getImagen,
+      estado: getEstado,
+      tipo: getTipo,
+      apertura: getApertura,
+      cierre: getCierre,
+      url: getUrl,
     };
-  }, [getTitle, getDescription, getImagen]);
+  }, [
+    getTitle,
+    getDescription,
+    getImagen,
+    getEstado,
+    getTipo,
+    getApertura,
+    getCierre,
+    getUrl,
+  ]);
 
   const location = useMemo(() => {
     return {
@@ -56,12 +75,18 @@ export default function Home() {
     fetch(`${API_URL}/proyecto/${selectedCardId}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log("Response Body:", data); // Print the response body
         setTitle(data.proyecto.nombre_proyecto);
         setDescription(data.proyecto.descripcion_proyecto);
         setImagen(data.proyecto.imagen_proyecto);
         setLatitud(data.proyecto.latitud);
         setLongitud(data.proyecto.longitud);
         setCategoria(data.proyecto.categoria_proyecto);
+        setEstado(data.proyecto.estado);
+        setTipo(data.proyecto.tipo_proyecto);
+        setApertura(data.proyecto.horario_apertura_proyecto);
+        setCierre(data.proyecto.horario_cierre_proyecto);
+        setUrl(data.proyecto.url_proyecto);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

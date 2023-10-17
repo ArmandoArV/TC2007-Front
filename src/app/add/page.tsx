@@ -2,19 +2,7 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { API_URL, ESTADOS_DE_MEXICO, CATEGORIAS, TIPOS } from "@/constants";
 import styles from "./page.module.css";
-
-interface IProyecto {
-  nombre_proyecto: string;
-  categoria_proyecto: string;
-  descripcion_proyecto: string;
-  tipo_proyecto: string;
-  estado: string;
-  latitud: number;
-  longitud: number;
-  url_proyecto: string;
-  imagen: string;
-  logo: string;
-}
+const Swal = require("sweetalert2");
 
 export default function Home() {
   const [projectData, setProjectData] = useState({
@@ -53,6 +41,19 @@ export default function Home() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Response Body:", data); // Print the response body
+        if (data.mensaje === "proyecto agregado") {
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "You have successfully created a project!",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+          });
+        }
       })
       .catch((error) => {
         console.error("Error:", error);

@@ -10,6 +10,11 @@ interface CardInfoProps {
     title: string;
     description: string;
     image: string;
+    estado: string;
+    tipo: string;
+    apertura: string;
+    cierre: string;
+    url: string;
   };
   location: {
     latitud: number;
@@ -50,6 +55,26 @@ export default function CardInfo({
         </div>
         <div className={styles.descriptionContainer}>
           <p className={styles.description}>{information.description}</p>
+        </div>
+      </div>
+      <div className={styles.middleContainer}>
+        <div className={styles.infoContainer}>
+          <div className={styles.info}>
+            <h3 className={styles.infoTitle}>Estado: </h3>
+            <p className={styles.infoText}>{information.estado}</p>
+          </div>
+          <div className={styles.info}>
+            <h3 className={styles.infoTitle}>Tipo: </h3>
+            <p className={styles.infoText}>{information.tipo}</p>
+          </div>
+          <div className={styles.info}>
+            <h3 className={styles.infoTitle}>Apertura: </h3>
+            <p className={styles.infoText}>{information.apertura}</p>
+          </div>
+          <div className={styles.info}>
+            <h3 className={styles.infoTitle}>Cierre: </h3>
+            <p className={styles.infoText}>{information.cierre}</p>
+          </div>
         </div>
       </div>
       <div className={styles.bottomContainer}>
