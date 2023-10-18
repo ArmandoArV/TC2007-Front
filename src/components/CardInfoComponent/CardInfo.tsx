@@ -33,14 +33,36 @@ export default function CardInfo({
   id,
 }: CardInfoProps) {
   const [isEdit, setIsEdit] = useState(false);
-  const [editedInfo, setEditedInfo] = useState({ ...information });
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [estado, setEstado] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [apertura, setApertura] = useState("");
+  const [cierre, setCierre] = useState("");
+  const [url, setUrl] = useState("");
+  const [latitud, setLatitud] = useState(0);
+  const [longitud, setLongitud] = useState(0);
+  const [categorias, setCategoria] = useState("");
+
+  const setValues = useCallback(() => {
+    setTitle(information.title);
+    setDescription(information.description);
+    setEstado(information.estado);
+    setTipo(information.tipo);
+    setApertura(information.apertura);
+    setCierre(information.cierre);
+    setUrl(information.url);
+    setLatitud(location.latitud);
+    setLongitud(location.longitud);
+    setCategoria(categoria);
+  }, [information, location, categoria]);
+
+  useEffect(() => {
+    setValues();
+  }, [setValues]);
+
   const handleEditClick = () => {
     setIsEdit(true);
-  };
-
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target;
-    setEditedInfo({ ...editedInfo, [name]: value });
   };
 
   const handleDelete = () => {
@@ -93,7 +115,8 @@ export default function CardInfo({
               className={styles.description}
               cols={30}
               rows={5}
-              onChange={handleInputChange}
+              onChange={(e) => setDescription(e.target.value)}
+              value={description}
             />
           ) : (
             <p className={styles.description}>{information.description}</p>
@@ -105,7 +128,11 @@ export default function CardInfo({
           <div className={styles.info}>
             <h3 className={styles.infoTitle}>Estado: </h3>
             {isEdit ? (
-              <input className={styles.infoText} onChange={handleInputChange} />
+              <input
+                className={styles.infoText}
+                onChange={(e) => setEstado(e.target.value)}
+                value={estado}
+              />
             ) : (
               <p className={styles.infoText}>{information.estado}</p>
             )}
@@ -113,7 +140,11 @@ export default function CardInfo({
           <div className={styles.info}>
             <h3 className={styles.infoTitle}>Tipo: </h3>
             {isEdit ? (
-              <input className={styles.infoText} />
+              <input
+                className={styles.infoText}
+                value={tipo}
+                onChange={(e) => setTipo(e.target.value)}
+              />
             ) : (
               <p className={styles.infoText}>{information.tipo}</p>
             )}
@@ -121,7 +152,11 @@ export default function CardInfo({
           <div className={styles.info}>
             <h3 className={styles.infoTitle}>Apertura: </h3>
             {isEdit ? (
-              <input className={styles.infoText} />
+              <input
+                className={styles.infoText}
+                onChange={(e) => setApertura(e.target.value)}
+                value={apertura}
+              />
             ) : (
               <p className={styles.infoText}>{information.apertura}</p>
             )}
@@ -129,7 +164,11 @@ export default function CardInfo({
           <div className={styles.info}>
             <h3 className={styles.infoTitle}>Cierre: </h3>
             {isEdit ? (
-              <input className={styles.infoText} />
+              <input
+                className={styles.infoText}
+                onChange={(e) => setCierre(e.target.value)}
+                value={cierre}
+              />
             ) : (
               <p className={styles.infoText}>{information.cierre}</p>
             )}
@@ -140,7 +179,11 @@ export default function CardInfo({
         <div className={styles.typesContainer}>
           <h3 className={styles.typesTitle}>Categoria(s): </h3>
           {isEdit ? (
-            <input className={styles.infoText} />
+            <input
+              className={styles.infoText}
+              onChange={(e) => setCategoria(e.target.value)}
+              value={categorias}
+            />
           ) : (
             <p className={styles.typesText}>{information.tipo}</p>
           )}
@@ -149,7 +192,11 @@ export default function CardInfo({
           <div className={styles.locationContainer}>
             <label className={styles.locationTitle}>Latitud</label>
             {isEdit ? (
-              <input className={styles.location} />
+              <input
+                className={styles.location}
+                onChange={(e) => setLatitud(Number(e.target.value))}
+                value={latitud}
+              />
             ) : (
               <p className={styles.locationText}>{location.latitud}</p>
             )}
@@ -157,7 +204,11 @@ export default function CardInfo({
           <div className={styles.locationContainer}>
             <label className={styles.locationTitle}>Longitud</label>
             {isEdit ? (
-              <input className={styles.location} />
+              <input
+                className={styles.location}
+                onChange={(e) => setLongitud(Number(e.target.value))}
+                value={longitud}
+              />
             ) : (
               <p className={styles.locationText}>{location.longitud}</p>
             )}

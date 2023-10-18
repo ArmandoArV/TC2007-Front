@@ -47,6 +47,7 @@ export default function Home() {
             title: "Success",
             text: "You have successfully created a project!",
           });
+          window.location.href = "/ubicaciones";
         } else {
           Swal.fire({
             icon: "error",
