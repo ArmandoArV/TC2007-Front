@@ -3,7 +3,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styles from "./CardInfo.module.css";
 import Image, { StaticImageData } from "next/image";
-import { categoria, categorias, API_URL } from "@/constants";
+import { API_URL, ESTADOS_DE_MEXICO, CATEGORIAS, TIPOS } from "@/constants";
 const Swal = require("sweetalert2");
 
 interface CardInfoProps {
@@ -93,11 +93,62 @@ export default function CardInfo({
       });
   };
 
+  const handleSave = () => {
+    console.log("Sending PUT request...");
+
+    fetch(`${API_URL}/proyecto/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("token") || "",
+      },
+      body: JSON.stringify({
+        nombre_proyecto: title,
+        descripcion_proyecto: description,
+        estado: estado,
+        tipo: tipo,
+        horario_apertura_proyecto: apertura,
+        horario_cierre_proyecto: cierre,
+        url_proyecto: url,
+        latitud: latitud,
+        longitud: longitud,
+        categoria_proyecto: categorias,
+      }),
+    })
+      .then((response) => {
+        console.log("Request URL:", response.url);
+        console.log("Response Status:", response.status);
+
+        if (response.status === 200) {
+          console.log("Successfully updated.");
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "You have successfully updated a project!",
+          });
+          window.location.reload();
+        } else {
+          console.error("Failed to update.");
+        }
+      })
+      .catch((error) => {
+        console.error("Network or fetch error:", error);
+      });
+  };
+
   return (
     <div className={styles.cardContainer}>
       <div className={styles.topContainer}>
         <div className={styles.titleContainer}>
-          <h1 className={styles.title}>{information.title}</h1>
+          {isEdit ? (
+            <input
+              className={styles.description}
+              onChange={(e) => setTitle(e.target.value)}
+              value={title}
+            />
+          ) : (
+            <h2 className={styles.title}>{information.title}</h2>
+          )}
         </div>
       </div>
       <div className={styles.mediumContainer}>
@@ -128,11 +179,18 @@ export default function CardInfo({
           <div className={styles.info}>
             <h3 className={styles.infoTitle}>Estado: </h3>
             {isEdit ? (
-              <input
-                className={styles.infoText}
+              <select
                 onChange={(e) => setEstado(e.target.value)}
                 value={estado}
-              />
+                className={styles.infoText}
+              >
+                <option value="">{estado}</option>
+                {ESTADOS_DE_MEXICO.map((estado) => (
+                  <option key={estado.id} value={estado.nombre}>
+                    {estado.nombre}
+                  </option>
+                ))}
+              </select>
             ) : (
               <p className={styles.infoText}>{information.estado}</p>
             )}
@@ -140,11 +198,18 @@ export default function CardInfo({
           <div className={styles.info}>
             <h3 className={styles.infoTitle}>Tipo: </h3>
             {isEdit ? (
-              <input
+              <select
                 className={styles.infoText}
-                value={tipo}
                 onChange={(e) => setTipo(e.target.value)}
-              />
+                value={tipo}
+              >
+                <option value="">{tipo}</option>
+                {TIPOS.map((tipo) => (
+                  <option key={tipo.id} value={tipo.nombre}>
+                    {tipo.nombre}
+                  </option>
+                ))}
+              </select>
             ) : (
               <p className={styles.infoText}>{information.tipo}</p>
             )}
@@ -179,11 +244,18 @@ export default function CardInfo({
         <div className={styles.typesContainer}>
           <h3 className={styles.typesTitle}>Categoria(s): </h3>
           {isEdit ? (
-            <input
-              className={styles.infoText}
+            <select
               onChange={(e) => setCategoria(e.target.value)}
               value={categorias}
-            />
+              className={styles.infoText}
+            >
+              <option value="">{categorias}</option>
+              {CATEGORIAS.map((categoria) => (
+                <option key={categoria.id} value={categoria.nombre}>
+                  {categoria.nombre}
+                </option>
+              ))}
+            </select>
           ) : (
             <p className={styles.typesText}>{information.tipo}</p>
           )}
@@ -229,7 +301,7 @@ export default function CardInfo({
               </button>
             </div>
             <div className={styles.rightButtonContainer}>
-              <button className={styles.btnSave}>
+              <button className={styles.btnSave} onClick={handleSave}>
                 Guardar{" "}
                 <img
                   src={"/images/tick.png"}
