@@ -32,3 +32,19 @@
   color: #d42610;
   margin-left: 0.5em;
 }
+
+.imageSize {
+  width: 5em;
+  height: 5em;
+  object-fit: cover;
+}
+
+.imageContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background: #f0f0f0;
+  border-radius: 1em;
+}

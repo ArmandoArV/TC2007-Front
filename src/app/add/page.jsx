@@ -5,38 +5,44 @@ import styles from "./page.module.css";
 const Swal = require("sweetalert2");
 
 export default function Home() {
-  const [projectData, setProjectData] = useState({
-    nombre_proyecto: "",
-    categoria_proyecto: "",
-    descripcion_proyecto: "",
-    tipo_proyecto: "",
-    estado: "",
-    latitud: 0,
-    longitud: 0,
-    url_proyecto: "",
-    imagen: "",
-    logo: "",
-    horario_apertura_proyecto: "",
-    horario_cierre_proyecto: "",
-  });
-
-  const handleInputChange = (event: any) => {
-    const { name, value } = event.target;
-    setProjectData({
-      ...projectData,
-      [name]: value,
-    });
-  };
+  const [nombre_proyecto, setNombre_proyecto] = useState("");
+  const [categoria_proyecto, setCategoria_proyecto] = useState("");
+  const [descripcion_proyecto, setDescripcion_proyecto] = useState("");
+  const [tipo_proyecto, setTipo_proyecto] = useState("");
+  const [estado, setEstado] = useState("");
+  const [latitud, setLatitud] = useState(0);
+  const [longitud, setLongitud] = useState(0);
+  const [url_proyecto, setUrl_proyecto] = useState("");
+  const [imagen, setImagen] = useState(null);
+  const [logo, setLogo] = useState(null);
+  const [horario_apertura, setHorario_apertura_proyecto] = useState("");
+  const [horario_cierre, setHorario_cierre_proyecto] = useState("");
 
   const handleSave = useCallback(() => {
-    console.log(projectData);
+    const requestBody = {
+      nombre_proyecto: nombre_proyecto,
+      categoria_proyecto: categoria_proyecto,
+      descripcion_proyecto: descripcion_proyecto,
+      tipo_proyecto: tipo_proyecto,
+      estado: estado,
+      latitud: latitud,
+      longitud: longitud,
+      url_proyecto: url_proyecto,
+      imagen: imagen,
+      logo: logo,
+      horario_apertura_proyecto: horario_apertura,
+      horario_cierre_proyecto: horario_cierre,
+    };
+
+    console.log("Request Body:", requestBody); // Print the request body
+
     fetch(`${API_URL}/proyecto`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         "x-access-token": localStorage.getItem("token") || "",
       },
-      body: JSON.stringify(projectData),
+      body: JSON.stringify(requestBody),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -59,7 +65,20 @@ export default function Home() {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, [projectData]);
+  }, [
+    nombre_proyecto,
+    categoria_proyecto,
+    descripcion_proyecto,
+    tipo_proyecto,
+    estado,
+    latitud,
+    longitud,
+    url_proyecto,
+    imagen,
+    logo,
+    horario_apertura,
+    horario_cierre,
+  ]);
 
   return (
     <main className="flex min-h-screen flex-row items-center justify-between p-2">
@@ -76,7 +95,7 @@ export default function Home() {
             type="text"
             name="nombre_proyecto"
             id="nombre_proyecto"
-            onChange={handleInputChange}
+            onChange={(e) => setNombre_proyecto(e.target.value)}
           />
           <label className={styles.label} htmlFor="description">
             Descripcion
@@ -88,7 +107,7 @@ export default function Home() {
             id="description"
             cols={30}
             rows={10}
-            onChange={handleInputChange}
+            onChange={(e) => setDescripcion_proyecto(e.target.value)}
           />
           <label className={styles.label} htmlFor="address">
             Estado
@@ -98,9 +117,10 @@ export default function Home() {
           </label>
           <select
             className="border border-gray-300 p-2"
-            name="estado" // Match the state property name
+            name="estado"
             id="address"
-            onChange={handleInputChange}
+            onChange={(e) => setEstado(e.target.value)}
+            value={estado}
           >
             <option value="0">Selecciona un estado</option>
             {ESTADOS_DE_MEXICO.map((estado) => (
@@ -119,7 +139,7 @@ export default function Home() {
             name="imagen"
             id="imagen"
             accept="image/*"
-            onChange={handleInputChange}
+            onChange={(e) => setImagen(e.target.files[0])}
           />
           <label className={styles.label} htmlFor="logo">
             Logo
@@ -130,7 +150,7 @@ export default function Home() {
             name="logo"
             id="logo"
             accept="image/*"
-            onChange={handleInputChange}
+            onChange={(e) => setLogo(e.target.files[0])}
           />
           <label className={styles.label} htmlFor="latitud">
             Latitud
@@ -143,7 +163,7 @@ export default function Home() {
             type="number"
             name="latitud"
             id="latitud"
-            onChange={handleInputChange}
+            onChange={(e) => setLatitud(e.target.value)}
           />
           <label className={styles.label} htmlFor="longitud">
             Longitud
@@ -156,7 +176,7 @@ export default function Home() {
             type="number"
             name="longitud"
             id="longitud"
-            onChange={handleInputChange}
+            onChange={(e) => setLongitud(e.target.value)}
           />
           <label className={styles.label} htmlFor="tipo_proyecto">
             Tipo
@@ -168,8 +188,8 @@ export default function Home() {
             className="border border-gray-300 p-2"
             name="tipo_proyecto" // Match the state property name
             id="tipo_proyecto"
-            onChange={handleInputChange}
-            value={projectData.tipo_proyecto}
+            onChange={(e) => setTipo_proyecto(e.target.value)}
+            value={tipo_proyecto}
           >
             <option value="">Selecciona un tipo</option>
             {TIPOS.map((tipo) => (
@@ -189,8 +209,8 @@ export default function Home() {
             className="border border-gray-300 p-2"
             name="categoria_proyecto"
             id="categoria_proyecto"
-            onChange={handleInputChange}
-            value={projectData.categoria_proyecto}
+            onChange={(e) => setCategoria_proyecto(e.target.value)}
+            value={categoria_proyecto}
           >
             <option value="0">Selecciona una categoria</option>
             {CATEGORIAS.map((categoria) => (
@@ -207,7 +227,7 @@ export default function Home() {
             type="text"
             name="url_proyecto"
             id="url_proyecto"
-            onChange={handleInputChange}
+            onChange={(e) => setUrl_proyecto(e.target.value)}
           />
           <label className={styles.label} htmlFor="horario_apertura_proyecto">
             Horario de apertura
@@ -217,7 +237,7 @@ export default function Home() {
             type="time"
             name="horario_apertura_proyecto"
             id="horario_apertura_proyecto"
-            onChange={handleInputChange}
+            onChange={(e) => setHorario_apertura_proyecto(e.target.value)}
           />
           <label className={styles.label} htmlFor="horario_cierre_proyecto">
             Horario de cierre
@@ -227,7 +247,7 @@ export default function Home() {
             type="time"
             name="horario_cierre_proyecto"
             id="horario_cierre_proyecto"
-            onChange={handleInputChange}
+            onChange={(e) => setHorario_cierre_proyecto(e.target.value)}
           />
 
           <button
