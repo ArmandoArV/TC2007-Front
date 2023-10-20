@@ -25,16 +25,16 @@ export default function Home() {
       descripcion_proyecto: descripcion_proyecto,
       tipo_proyecto: tipo_proyecto,
       estado: estado,
-      latitud: latitud,
-      longitud: longitud,
+      latitud: parseFloat(latitud),
+      longitud: parseFloat(longitud),
       url_proyecto: url_proyecto,
-      imagen: imagen,
-      logo: logo,
+      // imagen: imagen,
+      // logo: logo,
       horario_apertura_proyecto: horario_apertura,
       horario_cierre_proyecto: horario_cierre,
     };
 
-    console.log("Request Body:", requestBody); // Print the request body
+    console.log("Request Body:", requestBody);
 
     fetch(`${API_URL}/proyecto`, {
       method: "POST",
@@ -42,7 +42,7 @@ export default function Home() {
         "Content-Type": "multipart/form-data",
         "x-access-token": localStorage.getItem("token") || "",
       },
-      body: JSON.stringify(requestBody),
+      body: requestBody,
     })
       .then((response) => response.json())
       .then((data) => {
