@@ -269,7 +269,7 @@ export default function CardInfo({
             <select
               onChange={(e) => setCategoria(e.target.value)}
               value={categorias}
-              className={styles.infoText}
+              className={styles.typesText}
             >
               <option value="">{categorias}</option>
               {CATEGORIAS.map((categoria) => (
