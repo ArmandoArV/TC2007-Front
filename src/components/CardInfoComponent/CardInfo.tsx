@@ -66,6 +66,28 @@ export default function CardInfo({
   };
 
   const handleDelete = () => {
+    Swal.fire({
+      title: "¿Seguuuuro?",
+      text: "¡No podrás revertir esto!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#39720C",
+      cancelButtonColor: "#414141",
+      confirmButtonText: "Sí, ¡bórralo!",
+      imageUrl:
+        "https://memes.co.in/memes/update/uploads/2021/12/InShot_20211209_222013681.jpg",
+      imageWidth: 150,
+      imageHeight: 150,
+      imageAlt: "Custom image",
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        deleteProject();
+      }
+    });
+  };
+
+  const deleteProject = () => {
     fetch(`${API_URL}/proyecto/${id}`, {
       method: "DELETE",
       headers: {
