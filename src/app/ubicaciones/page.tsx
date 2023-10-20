@@ -9,7 +9,7 @@ import SearchComponent from "@/components/SearchComponent/SearchComponent";
 import villahermosa from "../../images/100Villa.jpg";
 import { API_URL } from "@/constants";
 import { get } from "http";
-
+import AuthRoute from "@/components/AuthComponent/AuthComponent";
 interface Categoria {
   name: string;
   isActive: boolean;
@@ -98,42 +98,46 @@ export default function Home() {
   }, [fetchData]);
 
   return (
-    <main className="flex min-h-screen flex-row items-center justify-between p-2">
-      <div className={styles.outerContainer}>
-        <Link href="/add">
-          <button className={styles.addButton}>+</button>
-        </Link>
-        <div className={styles.topContainer}>
-          <h1 className={styles.sectionHeader}>Ubicaciones</h1>
-        </div>
-        <div className={styles.bottomContainer}>
-          <div className={styles.leftContainer}>
-            <div className={styles.SearchBarContainer}>
-              <SearchComponent
-                search={searchQuery}
-                setSearch={setSearchQuery}
-                onSearch={handleSearch}
-              />
+    <>
+      <AuthRoute>
+        <main className="flex min-h-screen flex-row items-center justify-between p-2">
+          <div className={styles.outerContainer}>
+            <Link href="/add">
+              <button className={styles.addButton}>+</button>
+            </Link>
+            <div className={styles.topContainer}>
+              <h1 className={styles.sectionHeader}>Ubicaciones</h1>
             </div>
             <div className={styles.bottomContainer}>
-              <BarCardContainer
-                searchQuery={searchQuery}
-                onClickCard={handleCardSelect}
-              />
+              <div className={styles.leftContainer}>
+                <div className={styles.SearchBarContainer}>
+                  <SearchComponent
+                    search={searchQuery}
+                    setSearch={setSearchQuery}
+                    onSearch={handleSearch}
+                  />
+                </div>
+                <div className={styles.bottomContainer}>
+                  <BarCardContainer
+                    searchQuery={searchQuery}
+                    onClickCard={handleCardSelect}
+                  />
+                </div>
+              </div>
+              {selectedCardId ? (
+                <div className={styles.rightContainer}>
+                  <CardInfo
+                    information={cardInformation}
+                    location={location}
+                    categoria={categories}
+                    id={selectedCardId}
+                  />
+                </div>
+              ) : null}
             </div>
           </div>
-          {selectedCardId ? (
-            <div className={styles.rightContainer}>
-              <CardInfo
-                information={cardInformation}
-                location={location}
-                categoria={categories}
-                id={selectedCardId}
-              />
-            </div>
-          ) : null}
-        </div>
-      </div>
-    </main>
+        </main>
+      </AuthRoute>
+    </>
   );
 }
