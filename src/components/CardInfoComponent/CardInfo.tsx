@@ -68,17 +68,14 @@ export default function CardInfo({
 
   const handleDelete = () => {
     Swal.fire({
-      title: "¿Seguuuuro?",
+      title: "¿Seguro de eliminar esta ubicación?",
       text: "¡No podrás revertir esto!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#39720C",
       cancelButtonColor: "#414141",
       confirmButtonText: "Sí, ¡bórralo!",
-      imageUrl:
-        "https://memes.co.in/memes/update/uploads/2021/12/InShot_20211209_222013681.jpg",
-      imageWidth: 150,
-      imageHeight: 150,
+
       imageAlt: "Custom image",
     }).then((result: any) => {
       if (result.isConfirmed) {
@@ -193,7 +190,10 @@ export default function CardInfo({
               value={description}
               onInput={(e) => {
                 if (e.currentTarget.value.length > characterLimit) {
-                  e.currentTarget.value = e.currentTarget.value.slice(0, characterLimit);
+                  e.currentTarget.value = e.currentTarget.value.slice(
+                    0,
+                    characterLimit
+                  );
                 }
               }}
             />
