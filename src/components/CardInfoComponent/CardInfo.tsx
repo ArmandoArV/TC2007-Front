@@ -25,6 +25,7 @@ interface CardInfoProps {
 
   id: number;
 }
+const characterLimit = 350;
 
 export default function CardInfo({
   information,
@@ -190,6 +191,11 @@ export default function CardInfo({
               rows={5}
               onChange={(e) => setDescription(e.target.value)}
               value={description}
+              onInput={(e) => {
+                if (e.currentTarget.value.length > characterLimit) {
+                  e.currentTarget.value = e.currentTarget.value.slice(0, characterLimit);
+                }
+              }}
             />
           ) : (
             <p className={styles.description}>{information.description}</p>
