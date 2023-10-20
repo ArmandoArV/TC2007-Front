@@ -58,7 +58,7 @@ export default function Home() {
         if (data.mensaje === "proyecto agregado") {
           Swal.fire({
             icon: "success",
-            title: "Success",
+            title: "¡Listo!",
             text: "You have successfully created a project!",
           });
           window.location.href = "/ubicaciones";

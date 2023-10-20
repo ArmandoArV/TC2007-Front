@@ -100,7 +100,7 @@ export default function CardInfo({
           console.log("Successfully deleted.");
           Swal.fire({
             icon: "success",
-            title: "Success",
+            title: "¡Eliminado!",
             text: "You have successfully deleted a project!",
           });
           window.location.reload();
@@ -143,7 +143,7 @@ export default function CardInfo({
           console.log("Successfully updated.");
           Swal.fire({
             icon: "success",
-            title: "Success",
+            title: "¡Actualizado!",
             text: "You have successfully updated a project!",
           });
           window.location.reload();

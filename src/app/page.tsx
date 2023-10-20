@@ -48,7 +48,7 @@ export default function Home() {
           if (data.mensaje === "usuario autenticado") {
             Swal.fire({
               icon: "success",
-              title: "Success",
+              title: "Bienvenido",
               text: "You have successfully logged in!",
             });
             localStorage.setItem("token", data.token);
