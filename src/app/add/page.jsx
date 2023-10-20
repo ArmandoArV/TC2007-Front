@@ -59,14 +59,14 @@ export default function Home() {
           Swal.fire({
             icon: "success",
             title: "¡Listo!",
-            text: "You have successfully created a project!",
+            text: "¡Creado con éxito!",
           });
           window.location.href = "/ubicaciones";
         } else {
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Something went wrong!",
+            text: "¡Algo salió mal!",
           });
         }
       })

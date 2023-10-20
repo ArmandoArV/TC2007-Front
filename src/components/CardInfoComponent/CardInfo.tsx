@@ -101,7 +101,7 @@ export default function CardInfo({
           Swal.fire({
             icon: "success",
             title: "¡Eliminado!",
-            text: "You have successfully deleted a project!",
+            text: "¡Eliminaste el proyecto de forma satisfactoria!",
           });
           window.location.reload();
         } else {
@@ -144,7 +144,7 @@ export default function CardInfo({
           Swal.fire({
             icon: "success",
             title: "¡Actualizado!",
-            text: "You have successfully updated a project!",
+            text: "¡Actualizaste el proyecto de forma satisfactoria!",
           });
           window.location.reload();
         } else {

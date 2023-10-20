@@ -49,7 +49,7 @@ export default function Home() {
             Swal.fire({
               icon: "success",
               title: "Bienvenido",
-              text: "You have successfully logged in!",
+              text: "¡Has iniciado sesión correctamente!",
             });
             localStorage.setItem("token", data.token);
             window.location.href = "/ubicaciones";
@@ -57,7 +57,7 @@ export default function Home() {
             Swal.fire({
               icon: "error",
               title: "Oops...",
-              text: "Incorrect email or username or password!",
+              text: "¡Email o contraseña incorrectos!",
             });
           }
         })
