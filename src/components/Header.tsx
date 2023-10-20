@@ -50,32 +50,7 @@ export default function Header() {
             </Link>
           </div>
 
-          <div className="min-[856px]:hidden">
-            <button
-              className="outline-none p-2 rounded-full focus:border-gray-400 bg-slate-900 bg-opacity-50 focus:border
-              hover:bg-opacity-70 active:bg-opacity-100"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              ref={tooltipRef}
-            >
-              {isMenuOpen ? (
-                <img
-                  className="focus:border-none active:border-none opacity-50"
-                  src={"/images/icons/x.svg"}
-                  alt="Close Icon"
-                  width={24}
-                  height={24}
-                />
-              ) : (
-                <img
-                  className="focus:border-none active:border-none opacity-80"
-                  src={"/images/icons/hamburger.svg"}
-                  alt="Menu Icon"
-                  width={24}
-                  height={24}
-                />
-              )}
-            </button>
-          </div>
+
         </div>
         {/* Container for menuItems, aligned to the right */}
         <div className="flex-1 justify-end min-[856px]:block">

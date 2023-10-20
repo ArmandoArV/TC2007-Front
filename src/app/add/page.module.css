@@ -32,3 +32,14 @@
   color: #d42610;
   margin-left: 0.5em;
 }
+
+@media (max-width: 767px) {
+  .outerContainer {
+    width: 100%;
+    margin-top: 10em;
+  }
+
+  .formContainer {
+    width: 100%;
+  }
+}
