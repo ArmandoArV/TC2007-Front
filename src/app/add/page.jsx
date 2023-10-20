@@ -14,13 +14,13 @@ export default function Home() {
     latitud: 0,
     longitud: 0,
     url_proyecto: "",
-    imagen: "",
-    logo: "",
+    imagen: null,
+    logo: null,
     horario_apertura_proyecto: "",
     horario_cierre_proyecto: "",
   });
 
-  const handleInputChange = (event: any) => {
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
     setProjectData({
       ...projectData,
@@ -28,19 +28,33 @@ export default function Home() {
     });
   };
 
+  const handleFileInputChange = (event) => {
+    const { name, files } = event.target;
+    setProjectData({
+      ...projectData,
+      [name]: files[0],
+    });
+  };
+
   const handleSave = useCallback(() => {
-    console.log(projectData);
+    const formData = new FormData();
+    for (const key in projectData) {
+      formData.append(key, projectData[key]);
+    }
+
+    console.log("Request Body:", formData);
+
     fetch(`${API_URL}/proyecto`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        // Remove "Content-Type" header to let the browser set it automatically
         "x-access-token": localStorage.getItem("token") || "",
       },
-      body: JSON.stringify(projectData),
+      body: formData,
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Response Body:", data); // Print the response body
+        console.log("Response Body:", data);
         if (data.mensaje === "proyecto agregado") {
           Swal.fire({
             icon: "success",
@@ -98,9 +112,10 @@ export default function Home() {
           </label>
           <select
             className="border border-gray-300 p-2"
-            name="estado" // Match the state property name
+            name="estado"
             id="address"
             onChange={handleInputChange}
+            value={projectData.estado}
           >
             <option value="0">Selecciona un estado</option>
             {ESTADOS_DE_MEXICO.map((estado) => (
@@ -119,7 +134,7 @@ export default function Home() {
             name="imagen"
             id="imagen"
             accept="image/*"
-            onChange={handleInputChange}
+            onChange={handleFileInputChange}
           />
           <label className={styles.label} htmlFor="logo">
             Logo
@@ -130,7 +145,7 @@ export default function Home() {
             name="logo"
             id="logo"
             accept="image/*"
-            onChange={handleInputChange}
+            onChange={handleFileInputChange}
           />
           <label className={styles.label} htmlFor="latitud">
             Latitud
@@ -166,7 +181,7 @@ export default function Home() {
           </label>
           <select
             className="border border-gray-300 p-2"
-            name="tipo_proyecto" // Match the state property name
+            name="tipo_proyecto"
             id="tipo_proyecto"
             onChange={handleInputChange}
             value={projectData.tipo_proyecto}
